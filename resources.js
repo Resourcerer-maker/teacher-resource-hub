@@ -33,18 +33,14 @@ async function renderResources(subjectKey) {
       a.textContent = r.title;
       a.target = '_blank';
       a.rel = 'noopener';
-
-      const tag = document.createElement('span');
-      tag.className = 'format-tag';
-      tag.textContent = r.format;
-
       li.appendChild(a);
-      li.appendChild(tag);
-      if (r.yearLevel) {
-        const yr = document.createElement('span');
-        yr.className = 'year-tag';
-        yr.textContent = r.yearLevel;
-        li.appendChild(yr);
+
+      const metaParts = [r.format, r.yearLevel].filter(Boolean);
+      if (metaParts.length) {
+        const meta = document.createElement('span');
+        meta.className = 'resource-meta';
+        meta.textContent = '(' + metaParts.join(' · ') + ')';
+        li.appendChild(meta);
       }
       ul.appendChild(li);
     });
@@ -52,3 +48,4 @@ async function renderResources(subjectKey) {
     if (emptyState) emptyState.replaceWith(ul);
   });
 }
+
