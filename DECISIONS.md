@@ -41,12 +41,37 @@ Origin of the Universe · Global Climate Change
 
 Confirmed by owner 2026-07-21.
 
+## Site architecture (locked)
+- Multi-page: `index.html` (homepage, links out to subject pages) +
+  `biology.html` / `chemistry.html` / `physics.html` / `earth-space.html`,
+  each with its own subtopic chip-nav and card grid. No more single-page
+  scroll — was crowding once subtopics/resources stack up.
+- Shared `styles.css` across all pages (not duplicated per-page).
+- Design: notebook/field-guide aesthetic, subject-coded accent colours
+  (bio=green, chem=purple, phys=blue, earth=amber). Owner said they may
+  want to revisit aesthetic later — not locked in as final.
+
+## Resource upload system (locked, "Option B")
+- `resources.json` (repo root) is the single source of truth: one JSON array,
+  one entry per resource — title, subject, subtopic, filename, format,
+  optional yearLevel.
+- Actual files live in `resources/<subject>/` (one subfolder per subject,
+  NOT per subtopic — subtopic is metadata in the JSON, so re-categorising a
+  resource is a one-line edit, not a file move).
+- `resources.js` fetches resources.json client-side and renders cards into
+  the matching subtopic-card div on each subject page, replacing the
+  "coming soon" placeholder.
+- `RESOURCES_GUIDE.md` has the copy-paste template + steps for manual
+  uploads via GitHub's web UI (upload file → add JSON entry → commit).
+- Owner will use a mix of manual uploads and handing files to Claude —
+  same structure works for both.
+- Considered a full CMS (Decap/Netlify CMS) for a form-based admin UI —
+  deferred; revisit if hand-editing JSON becomes error-prone or annoying.
+
 ## Open items / not yet decided
-- Resource card format/fields (title, format icons, year level, download link, etc.)
-- File-naming convention for uploaded resources.
-- Manual upload flow — not yet built.
 - Cowork/automated intake pipeline — not yet designed.
 - Monetisation model — deferred until site has content + traffic.
+- Aesthetic revisit — owner flagged wanting to change the visual design later.
 
 ## Copyright flag (open, needs owner decision)
 Four resource files uploaded to the project (EM Spectrum worksheets, Elements &
@@ -57,3 +82,4 @@ as live resource cards on the site pending confirmation of redistribution
 rights. Do not publish content from these files until this is resolved —
 either by confirming rights, or by using them only as structural/topic
 reference and writing original resources instead.
+
