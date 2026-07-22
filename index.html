@@ -5,447 +5,59 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Teacher Resource Hub — Science</title>
 <meta name="description" content="Free, classroom-ready science resources organised by topic — Biology, Chemistry, Physics and Earth &amp; Space Science.">
-<style>
-
-  :root{
-    --paper: #f7f4ec;
-    --paper-line: #ddd6c2;
-    --ink: #21201c;
-    --ink-soft: #55524a;
-    --rule: #cfc7ae;
-
-    --bio: #3f6b4f;
-    --bio-tint: #e4ecdf;
-    --chem: #7a4a8f;
-    --chem-tint: #ece1f2;
-    --phys: #2f5f8a;
-    --phys-tint: #dfe9f2;
-    --earth: #a4652b;
-    --earth-tint: #f4e6d5;
-
-    --font-display: 'Source Serif 4', 'Iowan Old Style', Georgia, serif;
-    --font-body: 'Source Serif 4', Georgia, serif;
-    --font-mono: 'Space Mono', 'IBM Plex Mono', ui-monospace, monospace;
-  }
-
-  @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Space+Mono:wght@400;700&display=swap');
-
-  *{ box-sizing: border-box; }
-  html{ scroll-behavior: smooth; }
-
-  body{
-    margin:0;
-    background:
-      repeating-linear-gradient(var(--paper-line) 0 1px, transparent 1px 32px),
-      var(--paper);
-    color: var(--ink);
-    font-family: var(--font-body);
-    line-height: 1.5;
-  }
-
-  a{ color: inherit; }
-
-  /* ---------- header ---------- */
-  header.site{
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    background: var(--paper);
-    border-bottom: 2px solid var(--ink);
-  }
-  .header-inner{
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 20px 24px 0;
-  }
-  .brand{
-    display:flex;
-    align-items: baseline;
-    justify-content: space-between;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .brand h1{
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: clamp(1.5rem, 3vw, 2rem);
-    margin: 0;
-    letter-spacing: -0.01em;
-  }
-  .brand .kicker{
-    font-family: var(--font-mono);
-    font-size: 0.7rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-  }
-
-  /* subject tabs — the signature element */
-  nav.subjects{
-    max-width: 1080px;
-    margin: 18px auto 0;
-    padding: 0 24px;
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-  }
-  .tab{
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-    border: 2px solid var(--ink);
-    border-bottom: none;
-    background: var(--paper);
-    color: var(--ink);
-    padding: 10px 16px 8px;
-    cursor: pointer;
-    border-radius: 6px 6px 0 0;
-    position: relative;
-    top: 2px;
-    transition: transform .15s ease, background .15s ease;
-  }
-  .tab:hover{ transform: translateY(-2px); }
-  .tab[aria-expanded="true"]{
-    background: var(--ink);
-    color: var(--paper);
-  }
-  .tab.bio[aria-expanded="true"]{ background: var(--bio); border-color: var(--bio); }
-  .tab.chem[aria-expanded="true"]{ background: var(--chem); border-color: var(--chem); }
-  .tab.phys[aria-expanded="true"]{ background: var(--phys); border-color: var(--phys); }
-  .tab.earth[aria-expanded="true"]{ background: var(--earth); border-color: var(--earth); }
-
-  .tab .dot{
-    display:inline-block;
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    margin-right: 8px;
-    background: currentColor;
-    opacity: .6;
-  }
-
-  /* dropdown panels */
-  .panel{
-    display: none;
-    border-top: 2px solid var(--ink);
-    background: var(--paper);
-  }
-  .panel.open{ display: block; }
-  .panel-inner{
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 18px 24px 26px;
-  }
-  .subtopic-links{
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px 10px;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .subtopic-links a{
-    display: inline-block;
-    text-decoration: none;
-    font-size: 0.92rem;
-    padding: 6px 12px;
-    border: 1px solid var(--rule);
-    border-radius: 999px;
-    background: #fff;
-  }
-  .subtopic-links a:hover{ border-color: var(--ink); }
-
-  /* ---------- hero ---------- */
-  .hero{
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 56px 24px 40px;
-  }
-  .hero .eyebrow{
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink-soft);
-    margin-bottom: 10px;
-  }
-  .hero h2{
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: clamp(2rem, 5vw, 3.2rem);
-    line-height: 1.05;
-    margin: 0 0 18px;
-    max-width: 18ch;
-  }
-  .hero p{
-    max-width: 56ch;
-    color: var(--ink-soft);
-    font-size: 1.05rem;
-  }
-
-  /* ---------- subject sections ---------- */
-  section.subject{
-    max-width: 1080px;
-    margin: 0 auto;
-    padding: 30px 24px 10px;
-    scroll-margin-top: 140px;
-  }
-  .subject-head{
-    display:flex;
-    align-items: baseline;
-    gap: 14px;
-    border-bottom: 3px solid var(--line-color, var(--ink));
-    padding-bottom: 10px;
-    margin-bottom: 22px;
-  }
-  .subject-head .index{
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--line-color, var(--ink));
-    border: 1px solid var(--line-color, var(--ink));
-    border-radius: 4px;
-    padding: 2px 7px;
-  }
-  .subject-head h3{
-    font-family: var(--font-display);
-    font-size: 1.9rem;
-    margin: 0;
-  }
-
-  #biology .subject-head{ --line-color: var(--bio); }
-  #chemistry .subject-head{ --line-color: var(--chem); }
-  #physics .subject-head{ --line-color: var(--phys); }
-  #earth-space .subject-head{ --line-color: var(--earth); }
-
-  .subtopic-grid{
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 18px;
-    margin-bottom: 46px;
-  }
-  .subtopic-card{
-    scroll-margin-top: 140px;
-    border: 1px solid var(--rule);
-    border-radius: 10px;
-    background: #fffdf8;
-    padding: 18px 18px 20px;
-  }
-  .subtopic-card h4{
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 1.05rem;
-    margin: 0 0 10px;
-  }
-  .empty-state{
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--ink-soft);
-    border: 1px dashed var(--rule);
-    border-radius: 6px;
-    padding: 10px 12px;
-    text-align: center;
-  }
-
-  /* ---------- footer ---------- */
-  footer{
-    border-top: 2px solid var(--ink);
-    margin-top: 40px;
-    padding: 22px 24px 40px;
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--ink-soft);
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    html{ scroll-behavior: auto; }
-    .tab, .tab:hover{ transition: none; transform: none; }
-  }
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
 <header class="site">
   <div class="header-inner">
     <div class="brand">
-      <div>
+      <a class="brand-link" href="index.html">
         <div class="kicker">Free & classroom-ready</div>
         <h1>Teacher Resource Hub</h1>
-      </div>
+      </a>
     </div>
   </div>
-
   <nav class="subjects" aria-label="Subjects">
-    <button class="tab bio" aria-expanded="false" aria-controls="panel-biology" data-panel="panel-biology">
-      <span class="dot"></span>Biology
-    </button>
-    <button class="tab chem" aria-expanded="false" aria-controls="panel-chemistry" data-panel="panel-chemistry">
-      <span class="dot"></span>Chemistry
-    </button>
-    <button class="tab phys" aria-expanded="false" aria-controls="panel-physics" data-panel="panel-physics">
-      <span class="dot"></span>Physics
-    </button>
-    <button class="tab earth" aria-expanded="false" aria-controls="panel-earth-space" data-panel="panel-earth-space">
-      <span class="dot"></span>Earth &amp; Space
-    </button>
+    <a class="tab bio" href="biology.html"><span class="dot"></span>Biology</a>
+    <a class="tab chem" href="chemistry.html"><span class="dot"></span>Chemistry</a>
+    <a class="tab phys" href="physics.html"><span class="dot"></span>Physics</a>
+    <a class="tab earth" href="earth-space.html"><span class="dot"></span>Earth &amp; Space</a>
   </nav>
-
-  <div class="panel" id="panel-biology">
-    <div class="panel-inner">
-      <ul class="subtopic-links">
-        <li><a href="#bio-classification">Classification &amp; Biodiversity</a></li>
-        <li><a href="#bio-cells">Cells &amp; Cell Structure</a></li>
-        <li><a href="#bio-body-organs">Body Systems &amp; Organs</a></li>
-        <li><a href="#bio-body-feedback">Body Systems &amp; Feedback</a></li>
-        <li><a href="#bio-reproduction">Reproduction (Sexual &amp; Asexual)</a></li>
-        <li><a href="#bio-ecosystems">Ecosystems: Matter &amp; Energy Flow</a></li>
-        <li><a href="#bio-genetics">Genetics: DNA, Genes &amp; Heredity</a></li>
-        <li><a href="#bio-evolution">Evolution &amp; Natural Selection</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="panel" id="panel-chemistry">
-    <div class="panel-inner">
-      <ul class="subtopic-links">
-        <li><a href="#chem-particle-theory">Particle Theory &amp; States of Matter</a></li>
-        <li><a href="#chem-mixtures">Mixtures &amp; Separating Techniques</a></li>
-        <li><a href="#chem-elements-compounds">Elements, Compounds &amp; Mixtures</a></li>
-        <li><a href="#chem-changes">Physical &amp; Chemical Changes</a></li>
-        <li><a href="#chem-atomic-structure">Atomic Structure &amp; Radioactivity</a></li>
-        <li><a href="#chem-reactions">Chemical Reactions &amp; Equations</a></li>
-        <li><a href="#chem-periodic-table">The Periodic Table</a></li>
-        <li><a href="#chem-reaction-types">Reaction Types &amp; Reaction Rates</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="panel" id="panel-physics">
-    <div class="panel-inner">
-      <ul class="subtopic-links">
-        <li><a href="#phys-forces-motion">Forces &amp; Motion</a></li>
-        <li><a href="#phys-energy-transfer">Energy Types &amp; Transfer</a></li>
-        <li><a href="#phys-energy-conservation">Conservation of Energy</a></li>
-        <li><a href="#phys-ems">Waves &amp; the Electromagnetic Spectrum</a></li>
-        <li><a href="#phys-wave-particle">Wave vs Particle Models</a></li>
-        <li><a href="#phys-newtons-laws">Newton's Laws of Motion</a></li>
-      </ul>
-    </div>
-  </div>
-
-  <div class="panel" id="panel-earth-space">
-    <div class="panel-inner">
-      <ul class="subtopic-links">
-        <li><a href="#earth-sun-moon">Earth-Sun-Moon System (Seasons &amp; Tides)</a></li>
-        <li><a href="#earth-tectonics">Plate Tectonics</a></li>
-        <li><a href="#earth-rock-cycle">The Rock Cycle</a></li>
-        <li><a href="#earth-structure">Earth's Structure &amp; Layers</a></li>
-        <li><a href="#earth-spheres-carbon">Earth's Spheres &amp; the Carbon Cycle</a></li>
-        <li><a href="#earth-universe">Origin of the Universe</a></li>
-        <li><a href="#earth-climate">Global Climate Change</a></li>
-      </ul>
-    </div>
-  </div>
 </header>
 
 <div class="hero">
   <div class="eyebrow">Biology · Chemistry · Physics · Earth &amp; Space Science</div>
   <h2>Science resources, filed by topic — not by folder.</h2>
-  <p>Worksheets, slides and answer keys organised the way you actually plan a unit. Pick a subject above, jump to a subtopic, and find what you need.</p>
+  <p>Worksheets, slides and answer keys organised the way you actually plan a unit. Pick a subject below to browse its topics.</p>
 </div>
 
-<section class="subject" id="biology">
-  <div class="subject-head"><span class="index">01</span><h3>Biology</h3></div>
-  <div class="subtopic-grid">
-    <div class="subtopic-card" id="bio-classification"><h4>Classification &amp; Biodiversity</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="bio-cells"><h4>Cells &amp; Cell Structure</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="bio-body-organs"><h4>Body Systems &amp; Organs</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="bio-body-feedback"><h4>Body Systems &amp; Feedback</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="bio-reproduction"><h4>Reproduction (Sexual &amp; Asexual)</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="bio-ecosystems"><h4>Ecosystems: Matter &amp; Energy Flow</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="bio-genetics"><h4>Genetics: DNA, Genes &amp; Heredity</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="bio-evolution"><h4>Evolution &amp; Natural Selection</h4><div class="empty-state">Resources coming soon</div></div>
-  </div>
-</section>
-
-<section class="subject" id="chemistry">
-  <div class="subject-head"><span class="index">02</span><h3>Chemistry</h3></div>
-  <div class="subtopic-grid">
-    <div class="subtopic-card" id="chem-particle-theory"><h4>Particle Theory &amp; States of Matter</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="chem-mixtures"><h4>Mixtures &amp; Separating Techniques</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="chem-elements-compounds"><h4>Elements, Compounds &amp; Mixtures</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="chem-changes"><h4>Physical &amp; Chemical Changes</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="chem-atomic-structure"><h4>Atomic Structure &amp; Radioactivity</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="chem-reactions"><h4>Chemical Reactions &amp; Equations</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="chem-periodic-table"><h4>The Periodic Table</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="chem-reaction-types"><h4>Reaction Types &amp; Reaction Rates</h4><div class="empty-state">Resources coming soon</div></div>
-  </div>
-</section>
-
-<section class="subject" id="physics">
-  <div class="subject-head"><span class="index">03</span><h3>Physics</h3></div>
-  <div class="subtopic-grid">
-    <div class="subtopic-card" id="phys-forces-motion"><h4>Forces &amp; Motion</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="phys-energy-transfer"><h4>Energy Types &amp; Transfer</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="phys-energy-conservation"><h4>Conservation of Energy</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="phys-ems"><h4>Waves &amp; the Electromagnetic Spectrum</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="phys-wave-particle"><h4>Wave vs Particle Models</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="phys-newtons-laws"><h4>Newton's Laws of Motion</h4><div class="empty-state">Resources coming soon</div></div>
-  </div>
-</section>
-
-<section class="subject" id="earth-space">
-  <div class="subject-head"><span class="index">04</span><h3>Earth &amp; Space Science</h3></div>
-  <div class="subtopic-grid">
-    <div class="subtopic-card" id="earth-sun-moon"><h4>Earth-Sun-Moon System (Seasons &amp; Tides)</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="earth-tectonics"><h4>Plate Tectonics</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="earth-rock-cycle"><h4>The Rock Cycle</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="earth-structure"><h4>Earth's Structure &amp; Layers</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="earth-spheres-carbon"><h4>Earth's Spheres &amp; the Carbon Cycle</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="earth-universe"><h4>Origin of the Universe</h4><div class="empty-state">Resources coming soon</div></div>
-    <div class="subtopic-card" id="earth-climate"><h4>Global Climate Change</h4><div class="empty-state">Resources coming soon</div></div>
-  </div>
-</section>
+<div class="subject-tiles">
+  <a class="subject-tile bio" href="biology.html">
+    <div class="index">01</div>
+    <h3>Biology</h3>
+    <p>Cells, body systems, genetics, ecosystems &amp; evolution.</p>
+  </a>
+  <a class="subject-tile chem" href="chemistry.html">
+    <div class="index">02</div>
+    <h3>Chemistry</h3>
+    <p>Particle theory, elements &amp; compounds, reactions, the periodic table.</p>
+  </a>
+  <a class="subject-tile phys" href="physics.html">
+    <div class="index">03</div>
+    <h3>Physics</h3>
+    <p>Forces, energy, waves &amp; the electromagnetic spectrum, motion.</p>
+  </a>
+  <a class="subject-tile earth" href="earth-space.html">
+    <div class="index">04</div>
+    <h3>Earth &amp; Space Science</h3>
+    <p>Earth's structure, plate tectonics, the rock cycle, space &amp; climate.</p>
+  </a>
+</div>
 
 <footer>
   Teacher Resource Hub — built topic-first, for teachers.
 </footer>
-
-<script>
-  const tabs = document.querySelectorAll('.tab');
-  tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const panelId = tab.getAttribute('data-panel');
-      const panel = document.getElementById(panelId);
-      const isOpen = panel.classList.contains('open');
-
-      // close all
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
-      tabs.forEach(t => t.setAttribute('aria-expanded', 'false'));
-
-      if (!isOpen){
-        panel.classList.add('open');
-        tab.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-
-  // close panel after clicking a subtopic link (jump to section)
-  document.querySelectorAll('.subtopic-links a').forEach(link => {
-    link.addEventListener('click', () => {
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
-      tabs.forEach(t => t.setAttribute('aria-expanded', 'false'));
-    });
-  });
-
-  // click outside to close
-  document.addEventListener('click', (e) => {
-    if (!e.target.closest('nav.subjects') && !e.target.closest('.panel')){
-      document.querySelectorAll('.panel').forEach(p => p.classList.remove('open'));
-      tabs.forEach(t => t.setAttribute('aria-expanded', 'false'));
-    }
-  });
-</script>
 
 </body>
 </html>
