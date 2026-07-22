@@ -47,11 +47,10 @@ Confirmed by owner 2026-07-21.
   each with its own subtopic chip-nav and card grid. No more single-page
   scroll — was crowding once subtopics/resources stack up.
 - Shared `styles.css` across all pages (not duplicated per-page).
-- Design: notebook/field-guide aesthetic, subject-coded accent colours
-  (bio=green, chem=purple, phys=blue, earth=amber). Owner said they may
-  want to revisit aesthetic later — not locked in as final.
+- Design base: notebook/field-guide aesthetic, subject-coded accent colours
+  (bio=green, chem=purple, phys=blue, earth=amber).
 
-## Resource upload system (locked, "Option B")
+## Resource upload system (locked, "Option B" — tested & working)
 - `resources.json` (repo root) is the single source of truth: one JSON array,
   one entry per resource — title, subject, subtopic, filename, format,
   optional yearLevel.
@@ -64,14 +63,35 @@ Confirmed by owner 2026-07-21.
 - `RESOURCES_GUIDE.md` has the copy-paste template + steps for manual
   uploads via GitHub's web UI (upload file → add JSON entry → commit).
 - Owner will use a mix of manual uploads and handing files to Claude —
-  same structure works for both.
+  same structure works for both. Owner found GitHub's manual upload UI
+  fiddly (finding "Add file", finding the edit pencil on resources.json) —
+  give direct github.com/.../upload/main/... and .../edit/main/... links
+  when guiding manual uploads.
+- End-to-end tested with one original (non-copyrighted) resource in
+  Chemistry → Elements, Compounds & Mixtures — confirmed working.
 - Considered a full CMS (Decap/Netlify CMS) for a form-based admin UI —
   deferred; revisit if hand-editing JSON becomes error-prone or annoying.
+
+## Visual style (in progress)
+- Resource links render as plain hyperlinks (subject-accent colour, no
+  boxes/badges/pills) with small muted "(format · year)" text after —
+  modelled on draustinmaths.com's minimal list style. Owner explicitly
+  did not want bulky bordered cards per resource.
+- Subtopic headings are coloured with their subject's accent.
+- Subtopic-card containers still have a light border (organises the
+  group, not per-resource clutter) — owner hasn't flagged this as an issue.
+- Owner has flagged wanting a broader aesthetic revisit later (not urgent).
+
+## Working notes for future sessions
+- Recovery: GitHub keeps full file history (can revert any file); Netlify
+  keeps every past deploy live and re-publishable — a bad edit is always
+  recoverable, not a rebuild.
+- Keep this log to settled decisions only, not session narrative. When a
+  decision is superseded, replace the entry rather than appending a new one.
 
 ## Open items / not yet decided
 - Cowork/automated intake pipeline — not yet designed.
 - Monetisation model — deferred until site has content + traffic.
-- Aesthetic revisit — owner flagged wanting to change the visual design later.
 
 ## Copyright flag (open, needs owner decision)
 Four resource files uploaded to the project (EM Spectrum worksheets, Elements &
@@ -82,4 +102,5 @@ as live resource cards on the site pending confirmation of redistribution
 rights. Do not publish content from these files until this is resolved —
 either by confirming rights, or by using them only as structural/topic
 reference and writing original resources instead.
+
 
