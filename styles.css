@@ -261,32 +261,24 @@ nav.subjects{
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 2px;
 }
 .resource-list li{
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 8px;
-  border: 1px solid var(--rule);
-  border-radius: 6px;
-  padding: 8px 10px;
+  padding: 5px 0;
+  border-bottom: 1px solid var(--paper-line);
 }
+.resource-list li:last-child{ border-bottom: none; }
 .resource-list a{
-  font-weight: 600;
+  color: var(--accent, var(--ink));
   text-decoration: none;
-  flex: 1 1 auto;
+  font-weight: 500;
 }
 .resource-list a:hover{ text-decoration: underline; }
-.format-tag, .year-tag{
+.resource-meta{
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 0.72rem;
   color: var(--ink-soft);
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  padding: 2px 8px;
+  margin-left: 4px;
 }
 
 /* ---------- footer ---------- */
@@ -304,3 +296,4 @@ footer{
   html{ scroll-behavior: auto; }
   .tab, .tab:hover, .subject-tile, .subject-tile:hover{ transition: none; transform: none; }
 }
+
