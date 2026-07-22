@@ -244,6 +244,7 @@ nav.subjects{
   font-weight: 600;
   font-size: 1.05rem;
   margin: 0 0 10px;
+  color: var(--accent, var(--ink));
 }
 .empty-state{
   font-family: var(--font-mono);
@@ -296,4 +297,5 @@ footer{
   html{ scroll-behavior: auto; }
   .tab, .tab:hover, .subject-tile, .subject-tile:hover{ transition: none; transform: none; }
 }
+
 
