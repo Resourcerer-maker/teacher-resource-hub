@@ -1,0 +1,272 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=Space+Mono:wght@400;700&display=swap');
+
+:root{
+  --paper: #f7f4ec;
+  --paper-line: #ddd6c2;
+  --ink: #21201c;
+  --ink-soft: #55524a;
+  --rule: #cfc7ae;
+
+  --bio: #3f6b4f;
+  --bio-tint: #e4ecdf;
+  --chem: #7a4a8f;
+  --chem-tint: #ece1f2;
+  --phys: #2f5f8a;
+  --phys-tint: #dfe9f2;
+  --earth: #a4652b;
+  --earth-tint: #f4e6d5;
+
+  --font-display: 'Source Serif 4', 'Iowan Old Style', Georgia, serif;
+  --font-body: 'Source Serif 4', Georgia, serif;
+  --font-mono: 'Space Mono', 'IBM Plex Mono', ui-monospace, monospace;
+}
+
+*{ box-sizing: border-box; }
+html{ scroll-behavior: smooth; }
+
+body{
+  margin:0;
+  background:
+    repeating-linear-gradient(var(--paper-line) 0 1px, transparent 1px 32px),
+    var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+a{ color: inherit; }
+
+/* ---------- header / nav ---------- */
+header.site{
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--paper);
+  border-bottom: 2px solid var(--ink);
+}
+.header-inner{
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 20px 24px 16px;
+}
+.brand{
+  display:flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.brand a.brand-link{ text-decoration: none; }
+.brand h1{
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+.brand .kicker{
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+nav.subjects{
+  max-width: 1080px;
+  margin: 14px auto 0;
+  padding: 0 24px;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.tab{
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 2px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 9px 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  transition: transform .15s ease, background .15s ease;
+}
+.tab:hover{ transform: translateY(-2px); }
+.tab .dot{
+  display:inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  margin-right: 8px;
+  background: currentColor;
+  opacity: .6;
+}
+.tab[aria-current="page"]{ color: var(--paper); }
+.tab.bio[aria-current="page"]{ background: var(--bio); border-color: var(--bio); }
+.tab.chem[aria-current="page"]{ background: var(--chem); border-color: var(--chem); }
+.tab.phys[aria-current="page"]{ background: var(--phys); border-color: var(--phys); }
+.tab.earth[aria-current="page"]{ background: var(--earth); border-color: var(--earth); }
+
+/* ---------- homepage hero ---------- */
+.hero{
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 56px 24px 20px;
+}
+.hero .eyebrow{
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 10px;
+}
+.hero h2{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  line-height: 1.05;
+  margin: 0 0 18px;
+  max-width: 18ch;
+}
+.hero p{
+  max-width: 56ch;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+/* ---------- homepage subject tiles ---------- */
+.subject-tiles{
+  max-width: 1080px;
+  margin: 20px auto 60px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.subject-tile{
+  display: block;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  border-radius: 10px;
+  padding: 22px 20px;
+  background: #fffdf8;
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.subject-tile:hover{ transform: translateY(-3px); box-shadow: 0 8px 0 var(--tile-color, var(--ink)); }
+.subject-tile .index{
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--tile-color, var(--ink));
+}
+.subject-tile h3{
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin: 6px 0 6px;
+}
+.subject-tile p{
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 0.92rem;
+}
+.subject-tile.bio{ --tile-color: var(--bio); }
+.subject-tile.chem{ --tile-color: var(--chem); }
+.subject-tile.phys{ --tile-color: var(--phys); }
+.subject-tile.earth{ --tile-color: var(--earth); }
+
+/* ---------- subject page hero ---------- */
+.subject-hero{
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 40px 24px 8px;
+}
+.subject-hero .index{
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  border: 1px solid var(--accent, var(--ink));
+  color: var(--accent, var(--ink));
+  border-radius: 4px;
+  padding: 2px 7px;
+}
+.subject-hero h2{
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin: 12px 0 10px;
+}
+.subject-hero p{
+  max-width: 60ch;
+  color: var(--ink-soft);
+}
+
+/* subtopic chip nav (in-page jump list) */
+.subtopic-links{
+  max-width: 1080px;
+  margin: 18px auto 10px;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+  list-style: none;
+}
+.subtopic-links a{
+  display: inline-block;
+  text-decoration: none;
+  font-size: 0.88rem;
+  padding: 6px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  background: #fff;
+}
+.subtopic-links a:hover{ border-color: var(--accent, var(--ink)); color: var(--accent, var(--ink)); }
+
+/* ---------- subtopic cards ---------- */
+.subtopic-grid{
+  max-width: 1080px;
+  margin: 20px auto 10px;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 18px;
+}
+.subtopic-card{
+  scroll-margin-top: 130px;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  background: #fffdf8;
+  padding: 18px 18px 20px;
+}
+.subtopic-card h4{
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.05rem;
+  margin: 0 0 10px;
+}
+.empty-state{
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--ink-soft);
+  border: 1px dashed var(--rule);
+  border-radius: 6px;
+  padding: 10px 12px;
+  text-align: center;
+}
+
+/* ---------- footer ---------- */
+footer{
+  border-top: 2px solid var(--ink);
+  margin-top: 50px;
+  padding: 22px 24px 40px;
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--ink-soft);
+}
+
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior: auto; }
+  .tab, .tab:hover, .subject-tile, .subject-tile:hover{ transition: none; transform: none; }
+}
